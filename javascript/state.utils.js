@@ -275,7 +275,7 @@ state.utils = {
         console.log(`image changed ${id}`)
         fetch(`/lightdiffusionflow/local/imgs_callback`, data)
       });
-    }, 150);
+    }, 550);
   },
 
   clearImage: function clearImage(select) {
@@ -368,7 +368,7 @@ state.utils = {
           //let span = el.querySelector('.transition, .icon');
           //store.set(id, span.style.transform !== 'rotate(90deg)');
         });
-      }, 150);
+      }, 500);
 
     } catch (error) {
       console.warn(`accordion:${accordion}, id:${id}`)
@@ -465,9 +465,9 @@ state.utils = {
             state.utils.triggerMouseEvent(input, 'blur');
             selectingQueue -= 1;
             //console.log(`selectingQueue = ${selectingQueue}`)
-          }, 100);
+          }, 500);
 
-        }, selectingQueue * 200)
+        }, selectingQueue * 400)
       }
 
       setTimeout(() => {
@@ -501,7 +501,7 @@ state.utils = {
             }
           }
         });
-      }, 150);
+      }, 500);
     } catch (error) {
       console.warn('[state]: Error:', error);
     }
@@ -543,7 +543,7 @@ state.utils = {
                 //state.core.actions.output_log(`Error: \'<b style="color:Red;">${store.prefix + id}</b>\' import failed! The option \'<b style="color:Red;">${value}</b>\' was not found!`)
               }
               setTimeout(selectOption, 100);
-            }, 100);
+            }, 500);
           }
           selectOption();
         }
@@ -593,7 +593,7 @@ state.utils = {
   },
   onNextUiUpdates: function (func) {
     // brute force this to to ensure that the method is called after next few updates
-    onUiUpdate(this.callXTimes(function () { setTimeout(func, 5); }, 150));
+    onUiUpdate(this.callXTimes(function () { setTimeout(func, 5); }, 250));
   }
 };
 
