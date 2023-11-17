@@ -385,8 +385,8 @@ state.utils = {
 
             let value = store.get(id);
             var timeout = 100
-            if ('setting_sd_model_checkpoint' === id) {
-                timeout = 200
+            if ('setting_sd_model_checkpoint' === id|| id === 'setting_sd_vae') {
+                timeout = 5000
             }
 
 

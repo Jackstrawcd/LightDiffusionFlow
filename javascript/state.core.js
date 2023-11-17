@@ -677,7 +677,7 @@ state.core = (function () {
 
       gradioApp().getElementById('refresh_sd_model_checkpoint').click();
       gradioApp().getElementById('refresh_sd_vae').click();
-      
+
       let temp_fileInput = undefined
       try{temp_fileInput = fileInput[0]} catch(error){}
       if ( !temp_fileInput ) {temp_fileInput = fileInput}
