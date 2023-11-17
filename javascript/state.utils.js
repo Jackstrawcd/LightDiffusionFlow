@@ -386,14 +386,25 @@ state.utils = {
             let value = store.get(id);
             var timeout = 100
             if ('setting_sd_model_checkpoint' === id) {
-                timeout = 50
+                timeout = 200
             }
-            if (value) { //&& value != 'None'
 
+
+            if (value) { //&& value != 'None'
                 selectingQueue += 1;
+                var selectingQueueTimeout = selectingQueue * 200
+                if ('setting_sd_model_checkpoint' === id || id === 'setting_sd_vae')
+                {
+                    let input = select.querySelector('input');
+                    state.utils.triggerMouseEvent(input, 'focus');
+                     Array.from(select.querySelectorAll('ul li'));
+
+                    selectingQueueTimeout = 3000
+                }
+
                 setTimeout(() => {
 
-                    let input = select.querySelector('input');
+                    // let input = select.querySelector('input');
                     state.utils.triggerMouseEvent(input, 'focus');
                     setTimeout(() => {
                         let items = Array.from(select.querySelectorAll('ul li'));
@@ -411,24 +422,6 @@ state.utils = {
                             }
                         }
 
-                        // window.config 查找
-                        if (!successed) {
-                            if ('setting_sd_model_checkpoint' === id || id === 'setting_sd_vae') {
-                                var search = localized_value.replace(/^\s+|\s+$/g, "")
-                                window.gradio_config.components.forEach(comp => {
-                                    if (!successed) {
-                                        if (comp.props.elem_id === id) {
-                                            for (idx in comp.props.choices) {
-                                                item = comp.props.choices[idx]
-                                                successed = item.replace(/^\s+|\s+$/g, "") === search
-                                                if (successed) break
-                                            }
-
-                                        }
-                                    }
-                                })
-                            }
-                        }
 
                         let hash_res = localized_value.match(/\[[0-9A-Fa-f]{8,10}\]/)
                         if (!successed) { // && hash_pos != -1 找不到对应选项 并且选项里有10位哈希值
@@ -497,7 +490,7 @@ state.utils = {
                         //console.log(`selectingQueue = ${selectingQueue}`)
                     }, timeout);
 
-                }, selectingQueue * 200)
+                }, selectingQueueTimeout)
             }
 
             setTimeout(() => {
