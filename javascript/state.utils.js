@@ -416,12 +416,15 @@ state.utils = {
                             if ('setting_sd_model_checkpoint' === id || id === 'setting_sd_vae') {
                                 var search = localized_value.replace(/^\s+|\s+$/g, "")
                                 window.gradio_config.components.forEach(comp => {
-                                    if (comp.props.elem_id === id) {
-                                        for (item in comp.props.choices) {
-                                            successed = item.replace(/^\s+|\s+$/g, "") === search
-                                            if (successed) break
-                                        }
+                                    if (!successed) {
+                                        if (comp.props.elem_id === id) {
+                                            for (idx in comp.props.choices) {
+                                                item = comp.props.choices[idx]
+                                                successed = item.replace(/^\s+|\s+$/g, "") === search
+                                                if (successed) break
+                                            }
 
+                                        }
                                     }
                                 })
                             }
