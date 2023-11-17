@@ -275,7 +275,7 @@ state.utils = {
         console.log(`image changed ${id}`)
         fetch(`/lightdiffusionflow/local/imgs_callback`, data)
       });
-    }, 550);
+    }, 150);
   },
 
   clearImage: function clearImage(select) {
@@ -368,7 +368,7 @@ state.utils = {
           //let span = el.querySelector('.transition, .icon');
           //store.set(id, span.style.transform !== 'rotate(90deg)');
         });
-      }, 500);
+      }, 150);
 
     } catch (error) {
       console.warn(`accordion:${accordion}, id:${id}`)
@@ -380,6 +380,10 @@ state.utils = {
     try {
 
       let value = store.get(id);
+      var timeout = 100
+      if('setting_sd_model_checkpoint' === value){
+        timeout = 50
+      }
       if ( value ) { //&& value != 'None'
 
         selectingQueue += 1;
@@ -392,6 +396,9 @@ state.utils = {
             let localized_value = this.getTranslation(value)
             let successed = false
             for (li of items){
+              if('setting_sd_model_checkpoint' === value){
+                 console.info(li.lastChild.wholeText.trim().replace(/^\s+|\s+$/g,""))
+              }
               // li.lastChild.wholeText.trim() === value
               if (localized_value.replace(/^\s+|\s+$/g,"") === li.lastChild.wholeText.trim().replace(/^\s+|\s+$/g,"")) {
                 state.utils.triggerMouseEvent(li, 'mousedown');
@@ -465,9 +472,9 @@ state.utils = {
             state.utils.triggerMouseEvent(input, 'blur');
             selectingQueue -= 1;
             //console.log(`selectingQueue = ${selectingQueue}`)
-          }, 500);
+          }, timeout);
 
-        }, selectingQueue * 400)
+        }, selectingQueue * 200)
       }
 
       setTimeout(() => {
@@ -501,7 +508,7 @@ state.utils = {
             }
           }
         });
-      }, 500);
+      }, 150);
     } catch (error) {
       console.warn('[state]: Error:', error);
     }
@@ -543,7 +550,7 @@ state.utils = {
                 //state.core.actions.output_log(`Error: \'<b style="color:Red;">${store.prefix + id}</b>\' import failed! The option \'<b style="color:Red;">${value}</b>\' was not found!`)
               }
               setTimeout(selectOption, 100);
-            }, 500);
+            }, 100);
           }
           selectOption();
         }
@@ -593,7 +600,7 @@ state.utils = {
   },
   onNextUiUpdates: function (func) {
     // brute force this to to ensure that the method is called after next few updates
-    onUiUpdate(this.callXTimes(function () { setTimeout(func, 5); }, 250));
+    onUiUpdate(this.callXTimes(function () { setTimeout(func, 5); }, 150));
   }
 };
 
