@@ -388,10 +388,25 @@ state.utils = {
             if ('setting_sd_model_checkpoint' === id|| id === 'setting_sd_vae') {
                 timeout = 200
             }
-            
+
+
             if (value) { //&& value != 'None'
                 selectingQueue += 1;
                 var selectingQueueTimeout = selectingQueue * 200
+                if ('setting_sd_model_checkpoint' === id || id === 'setting_sd_vae')
+                {
+                    console.log("======> refresh checkpoints and vae")
+                    let input = select.querySelector('input');
+                    state.utils.triggerMouseEvent(input, 'focus');
+                    gradioApp().getElementById('refresh_sd_model_checkpoint').click();
+                    gradioApp().getElementById('refresh_sd_vae').click();
+                     if ('setting_sd_model_checkpoint' === id ){
+                          selectingQueueTimeout = selectingQueue * 200 + 6500
+                     } else{
+                          selectingQueueTimeout = selectingQueue * 200 + 8500
+                     }
+                }
+
                 let input = select.querySelector('input');
                 state.utils.triggerMouseEvent(input, 'blur');
                 setTimeout(() => {
