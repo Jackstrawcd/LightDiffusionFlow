@@ -672,12 +672,6 @@ state.core = (function () {
       actions.preset_output_log("start")
       //actions.output_log("<hr style='margin-top:10px;margin-bottom:10px'>Start parsing settings...")
       console.log(fileInput)
-
-      console.log("======> refresh checkpoints and vae")
-
-      gradioApp().getElementById('refresh_sd_model_checkpoint').click();
-      gradioApp().getElementById('refresh_sd_vae').click();
-
       let temp_fileInput = undefined
       try{temp_fileInput = fileInput[0]} catch(error){}
       if ( !temp_fileInput ) {temp_fileInput = fileInput}

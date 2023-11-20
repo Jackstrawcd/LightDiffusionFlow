@@ -386,7 +386,7 @@ state.utils = {
             let value = store.get(id);
             var timeout = 100
             if ('setting_sd_model_checkpoint' === id|| id === 'setting_sd_vae') {
-                timeout = 5000
+                timeout = 400
             }
 
 
@@ -395,16 +395,18 @@ state.utils = {
                 var selectingQueueTimeout = selectingQueue * 200
                 if ('setting_sd_model_checkpoint' === id || id === 'setting_sd_vae')
                 {
+                    console.log("======> refresh checkpoints and vae")
                     let input = select.querySelector('input');
                     state.utils.triggerMouseEvent(input, 'focus');
-                     Array.from(select.querySelectorAll('ul li'));
+                    gradioApp().getElementById('refresh_sd_model_checkpoint').click();
+                    gradioApp().getElementById('refresh_sd_vae').click();
 
-                    selectingQueueTimeout = 3000
+                    selectingQueueTimeout = selectingQueue * 500
                 }
 
                 setTimeout(() => {
 
-                    // let input = select.querySelector('input');
+                    let input = select.querySelector('input');
                     state.utils.triggerMouseEvent(input, 'focus');
                     setTimeout(() => {
                         let items = Array.from(select.querySelectorAll('ul li'));
