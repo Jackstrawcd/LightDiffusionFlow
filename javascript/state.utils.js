@@ -386,7 +386,7 @@ state.utils = {
             let value = store.get(id);
             var timeout = 100
             if ('setting_sd_model_checkpoint' === id|| id === 'setting_sd_vae') {
-                timeout = 400
+                timeout = 200
             }
 
 
@@ -403,7 +403,7 @@ state.utils = {
                      if ('setting_sd_model_checkpoint' === id ){
                           selectingQueueTimeout = selectingQueue * 200 + 20000
                      } else{
-                          selectingQueueTimeout = selectingQueue * 200 + 10000
+                          selectingQueueTimeout = selectingQueue * 200 + 12000
                      }
                 }
 
